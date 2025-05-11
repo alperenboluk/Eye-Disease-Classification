@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EyeAI</title>
+  <link rel="icon" type="image/png" href="EyeAI.png">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0a0a23;
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #0a0a23;
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .navbar.centered {
+      justify-content: center;
+    }
+
+    .navbar .logo-btn {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #4ea8ff;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .navbar .logo-btn:hover {
+      color: #0077cc;
+    }
+
+    .navbar .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    .navbar .nav-links li a {
+      text-decoration: none;
+      color: #ffffff;
+      transition: color 0.3s ease;
+    }
+
+    .navbar .nav-links li a:hover {
+      color: #4ea8ff;
+    }
+
+    .navbar .btn {
+      background-color: #4ea8ff;
+      color: #ffffff;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .navbar .btn:hover {
+      background-color: #0077cc;
+    }
+
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #ffffff;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero .background-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .hero .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+
+    .hero-content {
+      z-index: 2;
+    }
+
+    .hero-content h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    .btn-primary {
+      background-color: #4ea8ff;
+      color: #ffffff;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 25px;
+      transition: background-color 0.3s ease,transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: #0077cc;
+      transform: scale(1.1);
+      box-shadow: 0 0 12px #4ea8ff;
+      filter: brightness(1.2);
+    }
+
+    .upload-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      background-color: #0a0a23;
+    }
+
+    .upload-section h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      padding-top: 80px;
+    }
+
+    .upload-section p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+
+    .upload-section input[type="file"] {
+      margin-bottom: 20px;
+    }
+
+    .image-preview-container {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .image-preview-container img {
+      max-width: 300px;
+      border: 2px solid #4ea8ff;
+      border-radius: 10px;
+    }
+
+    .btn-soft {
+      background-color: #4ea8ff;
+      color: #ffffff;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 25px;
+      transition: background-color 1s ease,transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .btn-soft:hover {
+      background-color: #0077cc;
+      transform: scale(1.1);
+      box-shadow: 0 0 12px #4ea8ff;
+      filter: brightness(1.2);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #0a0a23;
+      color: #cfcfcf;
+      font-size: 0.9rem;
+    }
+
+    .hero-mini-logo {
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .hero-mini-logo:hover {
+      transform: scale(1.5);
+      filter: brightness(1.2) drop-shadow(0 0 5px #4ea8ff);
+    }
+    .btn-info {
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .btn-info:hover {
+      transform: scale(1.1);
+      filter: brightness(1.1) drop-shadow(0 0 5px #4ea8ff);
+    }
+
+    .about {
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .about:hover {
+      transform: scale(1.5);
+      filter: brightness(1.4) drop-shadow(0 0 8px #4ea8ff);
+      color: #4ea8ff;
+    }
+
+    .footer-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .glow-logo {
+      height: 40px;
+      transition: transform 0.3s ease, filter 0.3s ease;
+      filter: brightness(1) drop-shadow(0 0 0px transparent);
+    }
+
+    .glow-logo:hover {
+      transform: scale(1.5);
+      filter: brightness(2) drop-shadow(0 0 8px #a8cff3);
+    }
+
+    .glow-logo2 {
+      height: 40px;
+      transition: transform 0.3s ease, filter 0.3s ease;
+      filter: brightness(1) drop-shadow(0 0 0px transparent);
+    }
+
+    .glow-logo2:hover {
+      transform: scale(1.5);
+      filter: brightness(1) drop-shadow(0 0 8px #a8cff3);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <button class="logo-btn" id="logo-btn"><img src="EyeAI.png" alt="EyeAI Logo" class="hero-mini-logo"
+        style="height: 70px; width: 100px;"></button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#about" id="hakkında" class="about" style="margin-left: 1500px;"
+          onclick="showAboutSection()">HAKKINDA</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="overlay"></div>
+    <video autoplay loop muted playsinline class="background-video">
+      <source src="istockphoto-1160868560-640_adpp_is.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="hero-content">
+      <div class="hero-content">
+        <h1 style="font-size: 3rem; font-weight: 900; text-transform: uppercase;">
+          <span style="color: #4ea8ff;"> GÖZ</span> HASTALIKLARI<br>
+          <span>SINIFLANDIRMASI</span>
+        </h1>
+        <p style="font-size: 1.3rem; font-weight: bold; letter-spacing: 1px; margin-top: 20px;">
+          DERİN ÖĞRENME İLE TIBBİ TANI KOYMA
+        </p>
+        <button class="btn-primary" id="get-started" style="cursor: pointer;">Başlayalım</button>
+      </div>
+  </section>
+
+  <!-- Upload Section -->
+  <section class="upload-section hidden" id="upload-section">
+    <h1>Retina Fotoğrafını Yükleyin</h1>
+    <p>Yüklenen fotoğrafı potansiyel göz hastalığına sınıflandıracağız</p>
+    <form id="upload-form">
+      <input type="file" id="image-upload" accept="image/*" required>
+      <button type="submit" style="cursor: pointer;" class="btn-soft">Sınıflandır</button>
+    </form>
+    <div id="image-preview-container" class="image-preview-container hidden">
+      <h2>Yüklenen Fotoğraf:</h2>
+      <img id="image-preview" alt="Uploaded Image Preview">
+    </div>
+    <div id="result" style="margin-top: 20px;"></div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="hidden"
+    style="padding: 60px 20px; background-color: #111; color: #eee; text-align: center;">
+    <h2 style="font-size: 2.2rem; margin-bottom: 20px;">Yapay Zekâ Destekli Tanı Sistemi Hakkında</h2>
+    <p style="max-width: 800px; margin: auto; font-size: 1.05rem; line-height: 1.7;">
+      EyeAI, retina görüntülerinden potansiyel göz hastalıklarını tespit etmek amacıyla geliştirilmiş
+      bir <strong>yapay zekâ destekli analiz sistemidir</strong>. Derin öğrenme tabanlı bu sistem, katarakt, glokom,
+      diyabetik retinopati gibi hastalıkları sınıflandırmak için konvolüsyonel sinir ağları (CNN) kullanır.
+    </p>
+    <br>
+    <p style="max-width: 800px; margin: auto; font-size: 1.05rem; line-height: 1.7;">
+      Sistemde yer alan model, yüzlerce retina görüntüsü üzerinden eğitilmiş ve %90+ doğruluk seviyesine ulaşmıştır.
+      Ancak <strong>bu sistem tıbbi tanı koyma amacı taşımaz</strong>. Elde edilen sonuçlar yalnızca bilgilendirme
+      amaçlıdır ve <strong>kesin teşhis için bir göz hastalıkları uzmanına başvurmanız önemle tavsiye edilir</strong>.
+    </p>
+    <br>
+    <p style="max-width: 800px; margin: auto; font-size: 1.05rem; line-height: 1.7;">
+      EyeAI'nin amacı, erken uyarı mekanizması sağlayarak farkındalık oluşturmak ve klinik süreçlere yardımcı
+      olabilecek teknolojik bir destek sunmaktır.
+    </p>
+
+    <!-- TR & EN bilgi butonları -->
+    <div style="margin-top: 30px;">
+      <a href="https://oftalmoloji.org/tr/makaleler/yapay-zeka-ve-oftalmoloji/doi/tjo.galenos.2020.78989"
+        target="_blank"
+        class="btn-info"
+        style="display: inline-block; margin: 10px; padding: 12px 24px; background-color: #ffc107; color: #111; border-radius: 25px; text-decoration: none; font-weight: bold; transition: background-color 0.3s ease;">
+        Daha fazla bilgi (TR)
+      </a>
+      <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10591433/" target="_blank"
+        class="btn-info"
+      style="display: inline-block; margin: 10px; padding: 12px 24px; background-color: #4ea8ff; color: white; border-radius: 25px; text-decoration: none; font-weight: bold; transition: background-color 0.3s ease;">
+        More Info (EN)
+      </a>
+    </div>
+
+  </section>
+
+  <footer>
+
+    <div class="footer-logos">
+      <a href="https://www.karabuk.edu.tr/" target="_blank">
+        <img src="karabüklogo2.png" class="glow-logo2" alt="Logo 1" style="height: 50px; width: 60px; margin: 0 10px;">
+      </a>
+      <a href="https://muh.karabuk.edu.tr/bilgisayar" target="_blank">
+        <img src="karabüklogo.png" class="glow-logo" alt="Logo 2" style="height: 70px; width: 70px; margin: 0 10px;">
+      </a>
+    </div>
+    <p>© 2025 EyeAI - Designed By AlperenBoluk</p>
+  </footer>
+
+
+  <script>
+    document.getElementById('get-started').addEventListener('click', () => {
+      document.getElementById('hero').classList.add('hidden');
+      document.getElementById('nav-links').classList.add('hidden');
+      document.getElementById('navbar').classList.add('centered');
+      document.getElementById('upload-section').classList.remove('hidden');
+      document.getElementById('about').classList.add('hidden');
+    });
+
+    document.getElementById('logo-btn').addEventListener('click', () => {
+
+      document.getElementById('hero').classList.remove('hidden');
+      document.getElementById('nav-links').classList.remove('hidden');
+      document.getElementById('navbar').classList.remove('centered');
+      document.getElementById('upload-section').classList.add('hidden');
+      document.getElementById('about').classList.add('hidden');
+      document.getElementById('upload-form').reset();
+      document.getElementById('result').innerHTML = '';
+      document.getElementById('image-preview-container').classList.add('hidden');
+    });
+
+    document.getElementById('image-upload').addEventListener('change', (e) => {
+      document.getElementById('about').classList.add('hidden');
+
+      // ✅ Eski sonuç ve uyarıyı temizle
+      document.getElementById('result').innerHTML = '';
+      document.getElementById('image-preview-container').classList.add('hidden');
+
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const preview = document.getElementById('image-preview');
+          preview.src = event.target.result;
+          document.getElementById('image-preview-container').classList.remove('hidden');
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+
+    document.getElementById('upload-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const file = document.getElementById('image-upload').files[0];
+      const resultText = document.getElementById('result');
+      if (!file) {
+        resultText.textContent = 'Lütfen bir resim yükleyin.';
+        return;
+      }
+      const formData = new FormData();
+      formData.append('image', file);
+      resultText.innerHTML = 'Sınıflandırılıyor...';
+      fetch('http://127.0.0.1:5000/predict', {
+        method: 'POST',
+        body: formData
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.error) {
+            resultText.textContent = 'Hata: ' + data.error;
+          } else {
+            const allProbs = data.all_probs;
+            let resultHTML = "<h2>Tahmin Sonuçları:</h2><ul>";
+            const sortedProbs = Object.entries(allProbs).sort((a, b) => b[1] - a[1]);
+            for (const [label, value] of sortedProbs) {
+              const labelFormatted = label.replace(/_/g, " ").toUpperCase();
+              const percent = (value * 100).toFixed(2);
+              resultHTML += `<li><strong>${labelFormatted}:</strong> ${percent}%</li>`;
+            }
+            resultHTML += "</ul>";
+            resultHTML += `<p style="margin-top: 20px; color: #ffc107; font-size: 0.95rem; background-color: #222; padding: 12px 18px; border-left: 4px solid #ffc107; border-radius: 5px;">
+              ⚠️ <strong>Uyarı:</strong> Bu sistem tıbbi tanı koymaz. Sonuçlar yalnızca bilgi amaçlıdır. Kesin teşhis için bir göz hastalıkları uzmanına başvurunuz.
+              <br><a href="#about" onclick="showAboutSection()" style="color:#4ea8ff; text-decoration: underline;">Yapay zekâ sınıflandırması hakkında daha fazla bilgi</a>
+            </p>`;
+            resultText.innerHTML = resultHTML;
+
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          resultText.textContent = 'Sınıflandırma sırasında bir hata oluştu.';
+        });
+    });
+    function showAboutSection() {
+      const about = document.getElementById("about");
+      if (about.classList.contains("hidden")) {
+        about.classList.remove("hidden");
+        about.scrollIntoView({ behavior: "smooth" });
+      } else {
+        about.classList.add("hidden");
+        // 🔼 Kapatıldıktan sonra yukarı kaydır
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      }
+    }
+  </script>
+</body>
+
+</html>

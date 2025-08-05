@@ -61,6 +61,23 @@ This project combines image enhancement, deep learning model training, and backe
   }
 }
 
+ TTA Classification Report
+                      precision    recall  f1-score   support
+
+            cataract       0.91      0.94      0.92       156
+diabetic_retinopathy       0.99      1.00      1.00       165
+            glaucoma       0.82      0.82      0.82       151
+              normal       0.89      0.86      0.87       161
+
+            accuracy                           0.91       633
+           macro avg       0.90      0.90      0.90       633
+        weighted avg       0.90      0.91      0.90       633
+
+
+
+<img width="649" height="547" alt="indir" src="https://github.com/user-attachments/assets/140ba21a-4e6e-4830-898c-045e377799d6" />
+
+
 
 📍 Project Status
 ✅ Completed as a graduation project

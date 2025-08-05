@@ -36,6 +36,7 @@ This project combines image enhancement, deep learning model training, and backe
 - Grad-CAM visualization for model interpretation
 - Dynamic loading of models and class labels
 
+```
 ## 📁 Project Structure
 
 ├── app.py # Flask API backend
@@ -61,7 +62,8 @@ This project combines image enhancement, deep learning model training, and backe
   }
 }
 
- TTA Classification Report
+
+TTA Classification Report
                       precision    recall  f1-score   support
 
             cataract       0.91      0.94      0.92       156
@@ -73,9 +75,6 @@ diabetic_retinopathy       0.99      1.00      1.00       165
            macro avg       0.90      0.90      0.90       633
         weighted avg       0.90      0.91      0.90       633
 
-
-
-<img width="649" height="547" alt="indir" src="https://github.com/user-attachments/assets/140ba21a-4e6e-4830-898c-045e377799d6" />
 
 
 
